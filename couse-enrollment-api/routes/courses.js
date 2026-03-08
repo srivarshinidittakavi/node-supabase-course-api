@@ -17,11 +17,9 @@ router.post('/enroll', validateEnrollment, async (req, res) => {
   const { data, error } = await supabase
     .from('enrollments')
     .insert([{ student_name, course_id }])
-    .select('*')
+    .select()
 
-  if (error) {
-    return res.status(500).json(error)
-  }
+  if (error) return res.status(500).json(error)
 
   res.status(201).json(data)
 })
